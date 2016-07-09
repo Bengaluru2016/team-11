@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="java.sql.*,java.io.*"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
  <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Full List</title>
+    <title>Status</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
@@ -47,72 +47,64 @@
 					<div class="panel-body">
 						<input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Printers" />
 					</div>
-					<table class="table table-hover" id="task-table">
-						<thead>
-							<tr>
-								<th>Floor</th>
-								<th>Room #</th>
-								<th>Type</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>2</td>
-								<td>N253</td>
-								<td>Colour</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>N331</td>
-								<td>Colour</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>N341</td>
-								<td>Black & White</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>N436</td>
-								<td>Colour</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>N518</td>
-								<td>Colour</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>N529</td>
-								<td>Black & White</td>
-								<td>Working</td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td>N533</td>
-								<td>Colour</td>
-								<td>Working</td>
-							</tr>
-                            <tr>
-                                <td>5</td>
-                                <td>N539</td>
-                                <td>Black & White</td>
-                                <td>Working</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>N540</td>
-                                <td>Black & White</td>
-                                <td>Working</td>
-                            </tr>
-						</tbody>
-					</table>
+				
+						<%
+						PrintWriter write=response.getWriter();
+					    String url = "jdbc:mysql://villgrodb.cuvlpmbtfjjv.us-west-2.rds.amazonaws.com:3306/LearningVillgro";
+						String user = "villgrolearning";
+						String pass = "team112016";
+						String query1,query2;
+						Statement stmt = null;
+						Connection connection = null;
+						ResultSet rs = null;
+					    try  
+						{
+					    	Class.forName("com.mysql.jdbc.Driver").newInstance();
+							connection = DriverManager.getConnection(url, user, pass);
+							if(connection!=null)
+							{
+									
+								stmt = connection.createStatement();
+								query1 = "select * from users where designation = 'mentor' or designation = 'staff'";
+								rs = stmt.executeQuery(query1);
+							
+								    out.print("<table class='table table-bordered table-hover'>");
+									out.print("<tr class='active'>");
+									out.print("<th class='text-center'>Username</th>");
+									out.print("<th class='text-center'>Full name </th>");
+									out.print("<th class='text-center'> Designation</th>");
+									out.print("</tr>"); 
+									while(rs.next())
+									{
+										out.print("<tr>");
+										//link = "http://localhost:9090/KSCST_SPP/display.jsp?id="+rs.getString("app_ref");
+										//reject = "http://localhost:9090/KSCST_SPP/Reject?id="+rs.getString("app_ref")+"&admin="+username;
+										//approve = "http://localhost:9090/KSCST_SPP/Approve?id="+rs.getString("app_ref")+"&admin="+username;
+										out.print("<td>" + rs.getString("username") + "</td>");
+										//out.print("<td><a href="+link+">" + rs.getString("ptitle") + "</a></td>");
+										out.print("<td>" + rs.getString("name") + "</td>");
+										out.print("<td>" + rs.getString("designation") + "</td>");
+										out.print("</tr>");
+									}
+							}
+						}catch (Exception e)
+							{
+								out.println(e.getMessage());
+							}finally
+							{
+								try {
+									connection.close();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+								
+						
+						
+						%>
+						
+					
 				</div>
 			</div>
 		</div>
