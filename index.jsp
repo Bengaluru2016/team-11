@@ -42,6 +42,7 @@
     String url = "jdbc:mysql://villgrodb.cuvlpmbtfjjv.us-west-2.rds.amazonaws.com:3306/LearningVillgro";
 	String user = "villgrolearning";
 	String pass = "team112016";
+	String admin = request.getParameter("admin");
 	String query1,designation,name,query2;
 	Statement stmt = null;
 	Connection connection = null;
@@ -58,6 +59,7 @@
 			if(relog.contentEquals("1"))
 			{
 				pas = true;	
+				uname = admin;
 			}	
 				
 			stmt = connection.createStatement();
@@ -196,7 +198,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.jsp?relog=1&uname=<%=rs.getString("username") %>>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.jsp?relog=1&admin=<%=rs.getString("username") %>>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="charts.jsp"><i class="fa fa-fw fa-edit"></i> Blog</a>
