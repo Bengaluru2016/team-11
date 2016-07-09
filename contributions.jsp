@@ -221,7 +221,7 @@
 
                             <div class="form-group">
                                 <label>Upload notes and get reward</label>
-                                <input class="form-control" rows="3">
+                                <input type="file" class="form-control" rows="3">
                                 <!--<p class="help-block">Example block-level help text here.</p>-->
                             </div>
 
