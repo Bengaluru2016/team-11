@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="java.sql.*,java.io.*"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Tutorials</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +45,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">HI!</a>
+                <a class="navbar-brand" href="index.html">Welcome to villgro learning platform</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -128,7 +130,11 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> 
+                    <%
+                    String admin = request.getParameter("admin");
+                    out.print(admin); 
+                    %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -149,17 +155,17 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <li >
+                        <a href='index.jsp?relog=1&admin=<%=admin %>'><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.jsp"><i class="fa fa-fw fa-edit"></i> Blog</a>
+                        <a href='blog.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-edit"></i> Blog</a>
                     </li>
                     <li>
-                        <a href="leaderboard.jsp"><i class="fa fa-fw fa-table"></i> LeaderBoard</a>
+                        <a href='leaderboard.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-table"></i> LeaderBoard</a>
                     </li>
                     <li>
-                        <a href="contributions.jsp"><i class="fa fa-fw fa-edit"></i> Contribute</a>
+                        <a href='contributions.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-edit"></i> Contribute</a>
                     </li>
                <!--     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Mandatory Courses</a>
@@ -168,14 +174,14 @@
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Optional Courses</a>
                     </li>
                     -->
-                    <li>
+                    <li class="active">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-file"></i> Courses <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Mandatory Courses</a>
+                                <a href='tutorial.jsp?admin=<%=admin %>&type=mandatory'>Mandatory Courses</a>
                             </li>
                             <li>
-                                <a href="#">Optional Courses</a>
+                                <a href='tutorial.jsp?admin=<%=admin %>&type=optional'>Optional Courses</a>
                             </li>
                         </ul>
                     </li>
@@ -215,7 +221,7 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <form role="form">
+                        <form role="form" action="test.jsp?admin="<%=admin%>>
 
                             <div class="form-group">
                                 <label>Introduction</label>
@@ -226,112 +232,7 @@
 								  <p> references: <a href="https://en.wikipedia.org/wiki/Energy">https://en.wikipedia.org/wiki/Energy</a><p>
 								</div>
 
-                           <!-- <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Static Control</label>
-                                <p class="form-control-static">email@example.com</p>
-                            </div>
-
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Checkboxes</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 1
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 2
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 3
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Inline Checkboxes</label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">1
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">2
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">3
-                                </label>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Radio Buttons</label>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Inline Radio Buttons</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                </label>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>-->
-							<br>
+                         							<br>
 						
                             <button type="submit" class="btn btn-default">Take Test</button>
                             <!--<button type="reset" class="btn btn-default">Reset Button</button>-->

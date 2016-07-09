@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="java.sql.*,java.io.*"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Beginner learinng kit</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">HI!</a>
+                <a class="navbar-brand" href="index.html">Welcome to villgro learning platform!</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -130,7 +131,11 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><%
+                    String type = request.getParameter("type");
+                    String admin = request.getParameter("admin");
+                    out.print(admin); 
+                    %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -151,17 +156,17 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <li >
+                        <a href='index.jsp?relog=1&admin=<%=admin %>'><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.jsp"><i class="fa fa-fw fa-edit"></i> Blog</a>
+                        <a href='blog.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-edit"></i> Blog</a>
                     </li>
                     <li>
-                        <a href="leaderboard.jsp"><i class="fa fa-fw fa-table"></i> LeaderBoard</a>
+                        <a href='leaderboard.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-table"></i> LeaderBoard</a>
                     </li>
                     <li>
-                        <a href="contributions.jsp"><i class="fa fa-fw fa-edit"></i> Contribute</a>
+                        <a href='contributions.jsp?admin=<%=admin %>'><i class="fa fa-fw fa-edit"></i> Contribute</a>
                     </li>
                <!--     <li>
                         <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Mandatory Courses</a>
@@ -170,14 +175,14 @@
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Optional Courses</a>
                     </li>
                     -->
-                    <li>
+                    <li class="active">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-file"></i> Courses <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Mandatory Courses</a>
+                                <a href='tutorial.jsp?admin=<%=admin %>&type=mandatory'>Mandatory Courses</a>
                             </li>
                             <li>
-                                <a href="#">Optional Courses</a>
+                                <a href='tutorial.jsp?admin=<%=admin %>&type=optional'>Optional Courses</a>
                             </li>
                         </ul>
                     </li>
@@ -208,37 +213,67 @@
 					<div class="panel-body">
 						
 					</div>
-					<table class="table table-hover" id="dev-table">
-						<thead>
-							<tr>
-								<th>Course Title</th>
-								<th>Total Credits</th>
-								<th>Avg Time</th>
+					<%
+						PrintWriter write=response.getWriter();
+					    String url = "jdbc:mysql://villgrodb.cuvlpmbtfjjv.us-west-2.rds.amazonaws.com:3306/LearningVillgro";
+						String user = "villgrolearning";
+						String pass = "team112016";
+						String query1=null,link;
+						Statement stmt = null;
+						Connection connection = null;
+						ResultSet rs = null;
+					    try  
+						{
+					    	Class.forName("com.mysql.jdbc.Driver").newInstance();
+							connection = DriverManager.getConnection(url, user, pass);
+							if(connection!=null)
+							{
+									
+								stmt = connection.createStatement();
+								if(type.contentEquals("mandatory"))
+								query1 = "select * from courses where type = 'mandatory'";
+								else
+								query1 = "select * from courses where type = 'optional'";	
+								rs = stmt.executeQuery(query1);
 							
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><a href="html_images.asp" target="_blank">course1</a></td>
-
-								<td>Kilgore</td>
-								<td>Trout</td>
+								    out.print("<table class='table table-bordered table-hover'>");
+									out.print("<tr class='active'>");
+									out.print("<th class='text-center'>Course code</th>");
+									out.print("<th class='text-center'>Course name </th>");
+									out.print("<th class='text-center'> Max credits</th>");
+									out.print("<th class='text-center'> Domain</th>");
+									out.print("<th class='text-center'> Number of user subscribed</th>");
+									out.print("<th class='text-center'>Rating</th>");
+									out.print("</tr>"); 
+									while(rs.next())
+									{
+										out.print("<tr>");
+										link = "module1.jsp?admin="+admin+"&courseid="+rs.getString("course_id");
+										out.print("<td align='middle'><a href="+link+">" + rs.getString("course_id") + "</a></td>");
+										out.print("<td align='middle'>" + rs.getString("title") + "</td>");
+										out.print("<td align='middle'>" + rs.getString("max_credits") + "</td>");
+										out.print("<td align='middle'>" + rs.getString("domain") + "</td>"); 
+										out.print("<td align='middle'>" + rs.getString("user_subs") + "</td>");
+										out.print("<td align='middle'>" + rs.getString("rating") + "</td>");
+										out.print("</tr>");
+									}
+							}
+						}catch (Exception e)
+							{
+								out.println(e.getMessage());
+							}finally
+							{
+								try {
+									connection.close();
+								} catch (SQLException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
 								
-							</tr>
-							<tr>
-								<td><a href="html_images.asp" target="_blank">course2</a></td>
-								<td>Bob</td>
-								<td>Loblaw</td>
-								
-							</tr>
-							<tr>
-								<td><a href="html_images.asp" target="_blank">course3</a></td>
-								<td>Holden</td>
-								<td>Caulfield</td>
-								
-							</tr>
-						</tbody>
-					</table>
+						
+						
+						%>
 				</div>
 			</div>
 

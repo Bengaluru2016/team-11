@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Users List</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -162,7 +162,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                        Leader Board
+                        Users 
                            </h1>
                        <!-- <ol class="breadcrumb">
                             <li>
