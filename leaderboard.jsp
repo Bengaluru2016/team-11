@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Leader Board</title>
+    <title>S</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -187,6 +187,7 @@
 					</div>
 				
 						<%
+						int i=0;
 						PrintWriter write=response.getWriter();
 					    String url = "jdbc:mysql://villgrodb.cuvlpmbtfjjv.us-west-2.rds.amazonaws.com:3306/LearningVillgro";
 						String user = "villgrolearning";
@@ -203,25 +204,26 @@
 							{
 									
 								stmt = connection.createStatement();
-								query1 = "select * from score";
+								query1 = "select * from score order by score";
 								rs = stmt.executeQuery(query1);
 							
 								    out.print("<table class='table table-bordered table-hover'>");
 									out.print("<tr class='active'>");
-									out.print("<th class='text-center'>UserId</th>");
 									out.print("<th class='text-center'>Username</th>");
-									out.print("<th class='text-center'>Score</th>");
+									out.print("<th class='text-center'>Score </th>");
+									out.print("<th class='text-center'> Rank</th>");
 									out.print("</tr>"); 
 									while(rs.next())
 									{
+										i++;
 										out.print("<tr>");
 										//link = "http://localhost:9090/KSCST_SPP/display.jsp?id="+rs.getString("app_ref");
 										//reject = "http://localhost:9090/KSCST_SPP/Reject?id="+rs.getString("app_ref")+"&admin="+username;
 										//approve = "http://localhost:9090/KSCST_SPP/Approve?id="+rs.getString("app_ref")+"&admin="+username;
-										out.print("<td>" + rs.getString("userid") + "</td>");
-										//out.print("<td><a href="+link+">" + rs.getString("ptitle") + "</a></td>");
 										out.print("<td>" + rs.getString("username") + "</td>");
+										//out.print("<td><a href="+link+">" + rs.getString("ptitle") + "</a></td>");
 										out.print("<td>" + rs.getString("score") + "</td>");
+										out.print("<td>" + i + "</td>");
 										out.print("</tr>");
 									}
 							}
