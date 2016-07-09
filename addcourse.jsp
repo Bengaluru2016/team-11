@@ -41,7 +41,7 @@
 <span class="btn btn-primary">                   
     Choose file <input type="file" style="display: none;" multiple>
     </span>
-     <input type="text" name="image" readonly>
+    <input type="text" name="image" readonly>
   </div>
   
 </div>
