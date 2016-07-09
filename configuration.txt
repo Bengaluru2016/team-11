@@ -1,7 +1,11 @@
-AMAZON RDS SERVICES DETAILS
+AMAZON RDS SERVICES DETAILS ---
+
 
 HOST : villgrodb.cuvlpmbtfjjv.us-west-2.rds.amazonaws.com:3306
 
+
 USERNAME : villgrolearning
+
+
 
 PASSWORD : team112016
