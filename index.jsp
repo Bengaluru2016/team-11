@@ -89,7 +89,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">HI!</a>
+                <a class="navbar-brand" href="index.html">Villgro welcomes you!</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -145,8 +145,7 @@
                             <a href="#">Read All New Messages</a>
                         </li>
                     </ul>
-                    <%
-                    %>
+                   
                 </li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
@@ -176,7 +175,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <% out.println(rs.getString("name")); %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -198,7 +197,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.jsp?relog=1&admin=<%=rs.getString("username") %>>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href='index.jsp?relog=1&admin=<%=rs.getString("username") %>'><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="charts.jsp"><i class="fa fa-fw fa-edit"></i> Blog</a>
@@ -226,6 +225,9 @@
                                 <a href="#">Optional Courses</a>
                             </li>
                         </ul>
+                    </li>
+                     <li>
+                        <a href="feedback.jsp"><i class="fa fa-fw fa-envelope"></i> Feedback</a>
                     </li>
                   <!--  <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
@@ -549,7 +551,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">WELCOME!</a>
+                <a class="navbar-brand" href="index.html">Villgro welcomes you!!</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -634,7 +636,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <% out.println(rs.getString("name")); %><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
